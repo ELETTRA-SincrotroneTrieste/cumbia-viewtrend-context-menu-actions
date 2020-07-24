@@ -26,7 +26,7 @@ void CuViewTrendContextMenuActionPlugin::setup(QWidget *widget, const CuContext 
 {
     d->m_pos = widget->rect().topRight();
     d->m_ctx = cuctx;
-    if(d->m_actions.isEmpty() && cuctx) {
+    if(d->m_actions.isEmpty() && cuctx && cuctx->getReader()) {
         QAction *a  = new QAction("View Trend", this);
         connect(a, SIGNAL(triggered()), this, SLOT(onActionTriggered()));
         d->m_actions << a;
