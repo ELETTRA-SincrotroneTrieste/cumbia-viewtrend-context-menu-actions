@@ -100,7 +100,7 @@ void QuTrendWidget::onNewData(const CuData &da) {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
         QVector<double> qv(v.begin(), v.end()), qvx;
 #else
-        QVector<double> qv = QVector::fromStdVector(v), qvx;
+        QVector<double> qv = QVector<double>::fromStdVector(v), qvx;
 #endif
         for(int i = 0; i < qv.size(); i++) qvx.push_back(i);
         printf("QuTrendWidget::onNewData: invoking addTimeArray wit date time %s siz %d\n",
