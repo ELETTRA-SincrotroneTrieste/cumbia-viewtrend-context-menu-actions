@@ -97,7 +97,11 @@ void QuTrendWidget::onNewData(const CuData &da) {
         CuVariant ts = da["timestamp_ms"];
         ts.getType() == CuVariant::LongInt ? x = static_cast<qint64>(ts.toLongInt()) : x = ts.toDouble();
         const std::vector<double> &v = da["value"].toDoubleVector();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
         QVector<double> qv(v.begin(), v.end()), qvx;
+#else
+        QVector<double> qv = QVector::fromStdVector(v), qvx;
+#endif
         for(int i = 0; i < qv.size(); i++) qvx.push_back(i);
         printf("QuTrendWidget::onNewData: invoking addTimeArray wit date time %s siz %d\n",
                QDateTime::fromMSecsSinceEpoch(x).toString().toStdString().c_str(), qv.size());
