@@ -2,6 +2,7 @@
 #include <cucontrolsreader_abs.h>
 #include <QApplication>
 #include <cucontext.h>
+#include <cucontexti.h>
 #include "qutrendwidget.h"
 
 class CuViewTrendContextMenuActionPluginPrivate  {
@@ -22,11 +23,11 @@ CuViewTrendContextMenuActionPlugin::~CuViewTrendContextMenuActionPlugin()
     delete d;
 }
 
-void CuViewTrendContextMenuActionPlugin::setup(QWidget *widget, const CuContext *cuctx)
+void CuViewTrendContextMenuActionPlugin::setup(QWidget *widget, const CuContextI *cuctx)
 {
     d->m_pos = widget->rect().topRight();
-    d->m_ctx = cuctx;
-    if(d->m_actions.isEmpty() && cuctx && cuctx->getReader()) {
+    d->m_ctx = cuctx->getContext();
+    if(d->m_ctx && d->m_actions.isEmpty() && cuctx && d->m_ctx->getReader()) {
         QAction *a  = new QAction("View Trend", this);
         connect(a, SIGNAL(triggered()), this, SLOT(onActionTriggered()));
         d->m_actions << a;
