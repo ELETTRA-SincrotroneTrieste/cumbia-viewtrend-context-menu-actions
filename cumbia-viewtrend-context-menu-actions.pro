@@ -15,6 +15,9 @@ isEmpty(prefix) {
 
 include($${INSTALL_ROOT}/include/cumbia-qtcontrols/cumbia-qtcontrols.pri)
 
+QUMBIA_PLUGINS_LIBDIR=$${INSTALL_ROOT}/lib/qumbia-plugins
+
+
 QT       += core gui datavisualization
 
 TARGET = cumbia-viewtrend-context-menu-actions
@@ -43,6 +46,6 @@ DISTFILES += cumbia-viewtrend-context-menu-action.json  \
     README.md
 
 unix {
-    target.path = $${DEFINES_CUMBIA_QTCONTROLS_PLUGIN_DIR}
+    target.path = $${QUMBIA_PLUGINS_LIBDIR}
     INSTALLS += target
 }
